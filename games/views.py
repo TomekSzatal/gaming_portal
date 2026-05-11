@@ -12,13 +12,17 @@ def index(request):
     num_articles = Article.objects.count()
     num_reviews = Review.objects.count()
 
+    num_visits = request.session.get("num_visits", 0)
+    request.session["num_visits"] = num_visits + 1
+
     context = {
         "num_games": num_games,
         "num_articles": num_articles,
         "num_reviews": num_reviews,
+        "num_visits": num_visits + 1,
     }
 
-    return render(request, "games/index.html", context)
+    return render(request, "games/index.html", context=context)
 
 
 class GameListView(LoginRequiredMixin, generic.ListView):
