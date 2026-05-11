@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    {{ game.title }}
+
+    <a href="{% url 'games:game-delete' pk=game.id %}"
+       class="btn btn-danger link-to-page">
+      Delete
+    </a>
+
+    <a href="{% url 'games:game-update' pk=game.id %}"
+       class="btn btn-secondary link-to-page">
+      Update
+    </a>
+  </h1>
+
+  <hr>
+
+  <p><strong>Genre:</strong> {{ game.genre }}</p>
+
+  <p><strong>Release date:</strong> {{ game.release_date }}</p>
+
+  <p><strong>Description:</strong></p>
+
+  <p>{{ game.description }}</p>
+
+{% endblock %}

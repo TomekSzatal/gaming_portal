@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>
+    Game List
+
+    <a href="{% url 'games:game-create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+
+  <form method="get" style="margin-bottom: 20px;">
+    <input
+      type="text"
+      name="q"
+      placeholder="Search by title..."
+      value="{{ request.GET.q }}"
+    >
+    <button type="submit">Search</button>
+  </form>
+
+  {% if game_list %}
+    <ul>
+      {% for game in game_list %}
+        <li>
+          <a href="{% url 'games:game-detail' pk=game.id %}">
+            {{ game.title }}
+          </a>
+
+          ({{ game.genre }})
+        </li>
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    <p>There are no games.</p>
+  {% endif %}
+
+{% endblock %}
