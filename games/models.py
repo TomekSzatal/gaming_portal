@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 class Game(models.Model):
@@ -39,7 +40,12 @@ class Article(models.Model):
 class Review(models.Model):
     game = models.ForeignKey(Game, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    rating = models.FloatField()
+    rating = models.FloatField(
+        validators=[
+            MinValueValidator(0.0),
+            MaxValueValidator(10.0)
+        ]
+    )
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 

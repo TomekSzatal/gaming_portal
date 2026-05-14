@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>
+    Article List
+
+    <a href="{% url 'games:article-create' %}"
+       class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+
+  {% if article_list %}
+
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Game</th>
+        <th>Authors</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for article in article_list %}
+        <tr>
+          <td>{{ article.id }}</td>
+
+          <td>
+            <a href="{% url 'games:article-detail' pk=article.id %}">
+              {{ article.title }}
+            </a>
+          </td>
+
+          <td>{{ article.game.title }}</td>
+
+          <td>
+            {% for author in article.authors.all %}
+              {{ author.username }}
+            {% endfor %}
+          </td>
+
+          <td>
+            <a href="{% url 'games:article-update' pk=article.id %}">
+              Update
+            </a>
+          </td>
+
+          <td>
+            <a style="color: red"
+               href="{% url 'games:article-delete' pk=article.id %}">
+              Delete
+            </a>
+          </td>
+
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+    <p>There are no articles.</p>
+  {% endif %}
+
+{% endblock %}
