@@ -89,3 +89,6 @@ class ArticleDeleteView(LoginRequiredMixin, generic.DeleteView):
 class ReviewListView(LoginRequiredMixin, generic.ListView):
     model = Review
     paginate_by = 5
+
+class ReviewDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Review
