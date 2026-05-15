@@ -2,22 +2,16 @@
 
 {% block content %}
     <h1>Gaming Portal Home</h1>
-
     <p>Welcome to the best gaming portal!</p>
-
     <h2>Dynamic content</h2>
-
     <p>The portal has the following record counts:</p>
-
     <ul>
         <li><strong>Games:</strong> {{ num_games }}</li>
         <li><strong>Articles:</strong> {{ num_articles }}</li>
         <li><strong>Reviews:</strong> {{ num_reviews }}</li>
     </ul>
-
     <p>
         You have visited this page
         {{ num_visits }} time{{ num_visits|pluralize }}.
     </p>
-
 {% endblock %}
