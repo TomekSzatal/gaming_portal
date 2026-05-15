@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ review.game.title }}</h1>
+  <hr>
+  <p>
+    <strong>Author:</strong>
+    {{ review.author.username }}
+  </p>
+  <p>
+    <strong>Rating:</strong>
+    {{ review.rating }}/10
+  </p>
+  <p>
+    <strong>Created at:</strong>
+    {{ review.created_at }}
+  </p>
+  <hr>
+  <p>{{ review.comment }}</p>
+{% endblock %}
