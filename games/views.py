@@ -92,3 +92,12 @@ class ReviewListView(LoginRequiredMixin, generic.ListView):
 
 class ReviewDetailView(LoginRequiredMixin, generic.DetailView):
     model = Review
+
+class ReviewCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Review
+    fields = ("game", "rating", "comment")
+    success_url = reverse_lazy("games:review-list")
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

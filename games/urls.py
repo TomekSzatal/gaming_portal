@@ -20,4 +20,5 @@ urlpatterns = [
 
     path("reviews/", ReviewListView.as_view(), name="review-list"),
     path("reviews/<int:pk>/", ReviewDetailView.as_view(), name="review-detail"),
+    path("reviews/create/",ReviewCreateView.as_view(),name="review-create",),
 ]
