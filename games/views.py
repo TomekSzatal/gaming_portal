@@ -7,6 +7,7 @@ from django.views import generic
 from .forms import GameForm, ReviewForm, ArticleForm
 from .models import Game, Article, Review
 
+
 @login_required
 def index(request):
     num_games = Game.objects.count()
@@ -28,7 +29,7 @@ def index(request):
 
 class GameListView(LoginRequiredMixin, generic.ListView):
     model = Game
-    paginate_by = 5
+    paginate_by = 6
 
     def get_queryset(self):
         queryset = super().get_queryset()

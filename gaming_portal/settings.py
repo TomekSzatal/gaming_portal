@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "games",
     "crispy_forms",
-    "crispy_bootstrap4"
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -64,6 +64,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "games.context_processors.cfg_assets_root",
             ],
         },
     },
@@ -119,8 +120,15 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
+ASSETS_ROOT = "/static/assets"
+
 AUTH_USER_MODEL = "games.User"
 
+LOGIN_REDIRECT_URL = "/"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"

@@ -1,26 +1,70 @@
-{% extends "base.html" %}
+{% extends 'layouts/base-presentation.html' %}
 
 {% block content %}
-  <h1>
-    Review List
-    <a href="{% url 'games:review-create' %}"
-       class="btn btn-primary link-to-page">
-      Add review
-    </a>
-  </h1>
-  {% if review_list %}
-    <ul>
-      {% for review in review_list %}
-        <li>
-          <a href="{% url 'games:review-detail' pk=review.id %}">
-            {{ review.game.title }}
+<header class="header-2">
+  <div class="page-header section-height-75 relative"
+       style="background-image: url('{{ ASSETS_ROOT }}/img/curved-images/gaming_page.png')">
+    <div class="position-absolute w-100 z-index-1 bottom-0">
+      <svg class="waves"
+           xmlns="http://www.w3.org/2000/svg"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 24 150 40"
+           preserveAspectRatio="none"
+           shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave"
+                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="moving-waves">
+          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+<section class="pt-3 pb-5 position-relative z-index-2"
+         style="margin-top: -550px;">
+  <div class="container">
+    <div class="card shadow-lg border-radius-xl">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="mb-0">
+            Review List
+          </h1>
+          <a href="{% url 'games:review-create' %}"
+             class="btn btn-primary">
+            Add review
           </a>
-          - {{ review.rating }}/10
-          - {{ review.author.username }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no reviews.</p>
-  {% endif %}
+        </div>
+        {% if review_list %}
+          <div class="list-group">
+            {% for review in review_list %}
+              <a href="{% url 'games:review-detail' pk=review.id %}"
+                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div>
+                  <strong>{{ review.game.title }}</strong>
+                  <div class="text-sm text-muted">
+                    {{ review.author.username }}
+                  </div>
+                </div>
+                <span class="badge bg-gradient-primary">
+                  {{ review.rating }}/10
+                </span>
+              </a>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">
+            There are no reviews.
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}
