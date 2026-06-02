@@ -1,0 +1,64 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block content %}
+<header class="header-2">
+  <div class="page-header section-height-75 relative"
+       style="background-image: url('{{ ASSETS_ROOT }}/img/curved-images/gaming_page.png')">
+    <div class="position-absolute w-100 z-index-1 bottom-0">
+      <svg class="waves"
+           xmlns="http://www.w3.org/2000/svg"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 24 150 40"
+           preserveAspectRatio="none"
+           shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave"
+                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="moving-waves">
+          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+<section class="pt-3 pb-5 position-relative z-index-2"
+         style="margin-top: -550px;">
+  <div class="container">
+    <div class="card shadow-lg border-radius-xl">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between align-items-start flex-wrap mb-4">
+          <div>
+            <h1 class="mb-2">
+              {{ review.game.title }}
+            </h1>
+          </div>
+        </div>
+        <hr>
+        <div class="mb-3">
+          <p class="mb-1">
+            <strong>Author:</strong> {{ review.author.username }}
+          </p>
+          <p class="mb-1">
+            <strong>Rating:</strong> {{ review.rating }}/10
+          </p>
+          <p class="mb-1">
+            <strong>Created at:</strong> {{ review.created_at }}
+          </p>
+        </div>
+        <hr>
+        <div>
+          <p class="text-dark mb-0">
+            {{ review.comment }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

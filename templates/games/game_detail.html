@@ -1,0 +1,104 @@
+{% extends 'layouts/base-presentation.html' %}
+
+{% block content %}
+<header class="header-2">
+  <div class="page-header section-height-75 relative"
+       style="background-image: url('{{ ASSETS_ROOT }}/img/curved-images/gaming_page.png')">
+    <div class="position-absolute w-100 z-index-1 bottom-0">
+      <svg class="waves"
+           xmlns="http://www.w3.org/2000/svg"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           viewBox="0 24 150 40"
+           preserveAspectRatio="none"
+           shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave"
+                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="moving-waves">
+          <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40)" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.35)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.25)" />
+          <use xlink:href="#gentle-wave" x="48" y="8" fill="rgba(255,255,255,0.20)" />
+          <use xlink:href="#gentle-wave" x="48" y="13" fill="rgba(255,255,255,0.15)" />
+          <use xlink:href="#gentle-wave" x="48" y="16" fill="rgba(255,255,255,0.95)" />
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+<section class="pt-3 pb-5 position-relative z-index-2"
+         style="margin-top: -550px;">
+  <div class="container">
+    <div class="card shadow-lg border-radius-xl mb-4">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between align-items-start flex-wrap mb-4">
+          <div>
+            <h1 class="mb-2">{{ game.title }}</h1>
+            <p class="text-sm text-muted mb-0">
+              Genre: {{ game.genre }}
+            </p>
+          </div>
+          <div class="d-flex gap-2">
+            <a href="{% url 'games:game-update' pk=game.id %}"
+               class="btn btn-secondary btn-sm">
+              Update
+            </a>
+            <a href="{% url 'games:game-delete' pk=game.id %}"
+               class="btn btn-danger btn-sm">
+              Delete
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <h6 class="text-uppercase text-muted">
+              Release Date
+            </h6>
+            <p>{{ game.release_date }}</p>
+          </div>
+        </div>
+        <div class="mt-4">
+          <h5>Description</h5>
+          <p class="text-dark">
+            {{ game.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="card shadow-lg border-radius-xl">
+      <div class="card-body p-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="mb-0">Reviews</h3>
+        </div>
+        {% if game.review_set.all %}
+          <div class="row">
+            {% for review in game.review_set.all %}
+              <div class="col-12 mb-3">
+                <div class="border border-radius-md p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0">
+                      {{ review.author.username }}
+                    </h6>
+                    <span class="badge bg-gradient-primary">
+                      {{ review.rating }}/10
+                    </span>
+                  </div>
+                  <p class="mb-0 text-sm">
+                    {{ review.comment }}
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <p class="text-muted mb-0">
+            No reviews yet.
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
